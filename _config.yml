@@ -3,3 +3,19 @@ plugins:
   - jekyll-remote-theme
 minima:
   skin: dark
+
+#Navigation
+defaults:
+  -scope:
+    path: ""
+    type: "pages"
+    values:
+    layout: "page"
+
+  
+# Add site navigation
+nav_links:
+  - title: "Home"
+    url: "/"
+  - title: "Docs"
+    url: "/docs/test.md"
