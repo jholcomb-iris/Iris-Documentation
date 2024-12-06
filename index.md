@@ -1,7 +1,3 @@
----
-layout: page
-title: "Integrating to the IRIS Platform"
----
 # Integrating to the IRIS Platform
 
 Welcome to the documentation! Learn more about [Testing](./docs/test.md).
