@@ -1,4 +1,9 @@
-Welcome to the documentation! Learn more about linking to md files [Testing](./docs/test.md).
+# Integrating to the IRIS Platform
+
+Welcome to the documentation! 
+
+Learn more about linking to md files direct [Testing](./docs/test.md).
+Learn more about linking to md files direct [Testing2](./docs/test2.md).
 
 The IRIS platform is built with a rich set of integration tools that allows you to operate from your unique platform using the devices you choose.  We are committed to following already adopted standards whenever possible while providing custom solutions where those standards fall short. These tools are segmented into two categories: Device and Order Processing.
 
