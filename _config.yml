@@ -6,15 +6,7 @@ minima:
 
 # Remove nav_links section to prevent nav links from appearing
 # nav_links:
-#   - title: "Home"
-#     url: "/"
 #   - title: "Docs"
 #     url: "/docs/test.html"  # Add specific pages here, like test.html or others
 
   # Default layout for pages
-defaults:
-  - scope:
-      path: ""
-      type: "pages"
-    values:
-      layout: "page"
