@@ -4,9 +4,6 @@ plugins:
 minima:
   skin: dark
 
-# Site Title
-title: IRIS Documentation
-
 #Navigation
 defaults:
   -scope:
