@@ -1,14 +1,5 @@
-remote_theme: jekyll/minima
-plugins:
-  - jekyll-remote-theme
+theme: "./theme/minima"
+
+# Minima theme customizations (if any)
 minima:
   skin: dark
-
-  # Default layout for pages
-defaults:
-  - scope:
-      path: ""
-      type: "pages"
-    values:
-      layout: "home"
-

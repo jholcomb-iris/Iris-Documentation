@@ -1,5 +1,5 @@
 ---
-layout: home
+layout: default
 title: "Integrating to the IRIS Platform"
 ---
 
