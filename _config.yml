@@ -1,5 +1,2 @@
-theme: "./theme/minima"
+theme: minima
 
-# Minima theme customizations (if any)
-minima:
-  skin: dark
