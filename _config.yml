@@ -4,3 +4,11 @@ plugins:
 minima:
   skin: dark
 
+  # Default layout for pages
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+
