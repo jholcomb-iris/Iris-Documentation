@@ -4,9 +4,3 @@ plugins:
 minima:
   skin: dark
 
-# Remove nav_links section to prevent nav links from appearing
-# nav_links:
-#   - title: "Docs"
-#     url: "/docs/test.html"  # Add specific pages here, like test.html or others
-
-  # Default layout for pages
