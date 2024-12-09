@@ -1,6 +1,5 @@
 ---
 layout: default
-title: Integration
 ---
 
 # Integrating to the IRIS Platform
