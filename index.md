@@ -1,20 +1,16 @@
 ---
 layout: default
-title: "Integrating to the IRIS Platform"
+title: Integration
 ---
 
-Welcome to the documentation! 
-
-test
-Learn more about linking to md files direct [Testing](./docs/test.md).
-Learn more about linking to md files direct [Testing2](./docs/test2.md).
+# Integrating to the IRIS Platform
 
 The IRIS platform is built with a rich set of integration tools that allows you to operate from your unique platform using the devices you choose.  We are committed to following already adopted standards whenever possible while providing custom solutions where those standards fall short. These tools are segmented into two categories: Device and Order Processing.
 
 ## Devices
 ### Fundus Cameras
 IRIS provides varying levels of integration to most Fundus Cameras.
-> *The notable exception is Welsh Allan, whose devices are designed to restrict use outside their network.*  
+> *The notable exception is Welch Allyn, whose devices are designed to restrict use outside their network.*  
 
 There are two main points of integration with Cameras: Worklists and Images.  
 > The best and most reliable workflow is one in which the patients are available for selection from the camera user interface, without the operator being required to manually enter them.  
@@ -45,7 +41,7 @@ While the IRIS platform is fully operable through a rich suite of <a href="https
 
 
 - Primary Care (small) <a href="https://portal.retinalscreenings.com">Basic Integrations</a> page
-- Primary Care (large), IDN, FQHC  <a href="https://portal.retinalscreenings.com">EMR Integrations</a> page
+- Primary Care (large), IDN, FQHC [EMR Integrations](./integration/EMRIntegrations.html) page
 - Home Health Care <a href="https://portal.retinalscreenings.com">Cloud Direct Integrations</a> page
 - Retail / Kiosk <a href="https://portal.retinalscreenings.com">Cloud Direct Integrations</a> page
 - Payers  <a href="https://portal.retinalscreenings.com">Cloud Direct Integrations</a> and/or <a href="https://portal.retinalscreenings.com">Basic Integrations</a> page

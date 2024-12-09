@@ -1,4 +1,9 @@
+---
+layout: default
+title: HeaderLink
+---
+
 # test2
 
-This is another .md file
+This is from a header link
 

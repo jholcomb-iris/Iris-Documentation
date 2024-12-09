@@ -1,0 +1,3015 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/integration/TEC_007_Rev_B_Standard_Results.html" />
+<meta property="og:url" content="http://localhost:4000/integration/TEC_007_Rev_B_Standard_Results.html" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","url":"http://localhost:4000/integration/TEC_007_Rev_B_Standard_Results.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/"></a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/">Integration</a><a class="page-link" href="/docs/test2.html">HeaderLink</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title"></h1>
+  </header>
+
+  <div class="post-content">
+    <h2 id="standard-results-oru-r01-outbound-specifications">Standard Results (ORU-R01) Outbound Specifications</h2>
+
+<p>Interface between IRIS v2.5 and a third-party system</p>
+
+<p>TEC 007 Rev B Standard Results (ORU-R01) Outbound Specifications</p>
+
+<h3 id="acknowledgments">Acknowledgments</h3>
+
+<p>Interface specifications prepared by Adam Diaz. Please send any feedback to support@irishelp.zendesk.com.</p>
+
+<h3 id="confidentiality-and-proprietary-rights">Confidentiality and Proprietary Rights</h3>
+
+<p>This document is the confidential property of Intelligent Retinal Imaging Systems (IRIS). No part of this document may be reproduced in any form or incorporated into any information retrieval system without the written permission of IRIS.</p>
+
+<h3 id="limitations-and-conditions-of-use">Limitations and Conditions of Use</h3>
+
+<p>Some fields noted in this document need the pre-defined values to be identified by the receiving EMR. Those values will be covered in the Standard Orders (ORM-O01) Interface document and used here. If there are any fields represented in this document that are not populated but required by a receiving EMR, IRIS will populate these value(s)as requested. IRIS uses HL7 v2.4 as a main protocol for message sharing. If the receiving EMR requires a different version, IRIS will provide messages for the corresponding version. This document will describe the standard IRIS ORU message by segments as they appear in an HL7 message.</p>
+
+<h3 id="disclaimers">Disclaimers</h3>
+
+<p>Although unlikely, IRIS reserves the right to make changes in specifications and features shown herein at any time without notice. This does not constitute a representation or documentation regarding the service featured. Contact your IRIS Representative for the most current information.</p>
+
+<p>Intelligent Retinal Imaging Systems™</p>
+
+<p>2 N Palafox Street, Suite 200</p>
+
+<p>Pensacola, Florida 32502</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>1-888-535-2574</td>
+      <td>info@retinalscreenings.com</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="table-of-contents">Table of Contents</h2>
+
+<ol>
+  <li><a href="#basic-interface-structure-and-description">Basic Interface Structure and Description</a></li>
+  <li><a href="#msh-segment---message-header">MSH Segment – Message Header</a></li>
+  <li><a href="#pid-segment---patient-identification">PID Segment - Patient Identification</a></li>
+  <li><a href="#pv1-segment-–-patient-visit">PV1 Segment – Patient Visit</a></li>
+  <li><a href="#orc-–-common-order">ORC – Common Order</a></li>
+  <li><a href="#obr-–-observation-request">OBR – Observation Request</a></li>
+  <li><a href="#dg1-segment-–-diagnosis">DG1 – Diagnosis</a></li>
+  <li><a href="#obx-–-observation-result-segment">OBX – Observation Result</a></li>
+  <li><a href="#first-obx">First OBX</a></li>
+  <li><a href="#second-obx">Second OBX</a></li>
+  <li><a href="#third-obx">Third OBX</a></li>
+  <li><a href="#fourth-obx">Fourth OBX</a></li>
+  <li><a href="#fifth-obx">Fifth OBX</a></li>
+  <li><a href="#sixth-obx">Sixth OBX</a></li>
+  <li><a href="#seventh-obx">Seventh OBX</a></li>
+  <li><a href="#eighth-obx">Eighth OBX</a></li>
+  <li><a href="#ninth-obx">Ninth OBX</a></li>
+  <li><a href="#tenth-and-above-obx">Tenth and Above OBX</a></li>
+  <li><a href="#last-obx">Last OBX</a></li>
+  <li><a href="#example-messages">Example Messages</a></li>
+  <li><a href="#revision-history">Revision History</a></li>
+</ol>
+
+<hr />
+
+<h2 id="basic-interface-structure-and-description">Basic Interface Structure and Description</h2>
+
+<p>This document outlines the values sent in an HL7 results message (ORU-R01) from IRIS to a third-party system. This third-party system could be another application, an interface engine, or an EMR. For the purposes of this documentation, this third-party will be referred to an EMR.</p>
+
+<p>IRIS uses HL7 v2.4 as a main protocol for message sharing. If there are any fields represented in this document that are not populated but required by a receiving EMR, IRIS will populate these value(s) as requested. If the receiving EMR requires a different version, IRIS can provide messages for the corresponding version. If the EMR expects messages to be delivered in a format other than HL7, this will need to be discussed with an IRIS Interface Engineer as this will not be covered in the scope of this document – please contact IRIS support for more information.</p>
+
+<p>Following this section, the rest of the document will be divided by HL7 segment types as they would appear in a delivered HL7 message. IRIS has two different methods for delivering the document in an OBX segment: encoded PDF or pointer link (static URL). This will be described in detail later in that section. The last section of this document contains an example HL7 message.</p>
+
+<h3 id="customization">Customization</h3>
+<p>This document provides the default implementation of IRIS results to an HL7 ORU message.  These mappings can be customized to suite your requirements. Customization can either be performed by an IRIS integration specialist or if desired you may designate an individual within your organization with the Integrator role providing them access to the IRIS Integration application.</p>
+
+<h2 id="msh-segment---message-header">MSH Segment - Message Header</h2>
+
+<p>The message header segment includes information that defines the structure of the message.</p>
+
+<h3 id="sample-msh-segment">Sample MSH segment:</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MSH|^\~\&amp;|IRIS|IRIS|VENDOR|VENDOR|20170410145907||ORU^R01|170410145907|T|2.4 
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Name and type</th>
+      <th>Sample value</th>
+      <th>Description</th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MSH-1</td>
+      <td>Field Separator (ST)</td>
+      <td> </td>
+      <td> </td>
+      <td>Auto generated</td>
+    </tr>
+    <tr>
+      <td>MSH-2</td>
+      <td>Encoding Characters (ST)</td>
+      <td>^~\&amp;</td>
+      <td>Auto generated</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>MSH-3</td>
+      <td>Sending Application (HD)</td>
+      <td>IRIS</td>
+      <td>“IRIS” is used as the default value</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>MSH-4</td>
+      <td>Sending Facility (HD)</td>
+      <td>IRIS</td>
+      <td>“IRIS” is used as the default value</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>MSH-5</td>
+      <td>Receiving Application (HD)</td>
+      <td>VENDOR</td>
+      <td>The name of the EMR. This needto be pre-defined</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>MSH-6</td>
+      <td>Receiving Facility (HD)</td>
+      <td>VENDOR</td>
+      <td>The name or id of clinic. This need to be pre-defined.</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>MSH-7</td>
+      <td>Date/Time of Message (TS)</td>
+      <td>yyyyMMddHHmmss format, e.g. “20190410145907”</td>
+      <td>Auto generated based off servertime (UTC if hosted by Iris)</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>MSH-8</td>
+      <td>Security (ST)</td>
+      <td> </td>
+      <td>Empty</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>MSH-9</td>
+      <td>Message Type (MSG)</td>
+      <td>ORU^R01</td>
+      <td>Unchanging</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>MSH-10</td>
+      <td>Message Control ID (ST)</td>
+      <td>190410145907</td>
+      <td>Auto generated from server time (UTC if hosted by Iris)</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>MSH-11</td>
+      <td>Processing ID (PT)</td>
+      <td>T</td>
+      <td>P (Production) or T (Test) will be used based on the system environment</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>MSH-12</td>
+      <td>Version ID (VID)</td>
+      <td>2.4</td>
+      <td>HL7 Version</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="#table-of-contents">back to Table of Contents</a></p>
+
+<h2 id="pid-segment---patient-identification">PID Segment - Patient Identification</h2>
+
+<p>The patient identification segment will include patient-specific demographic information.</p>
+
+<h3 id="sample-pid-segment">Sample PID segment:</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PID||ITCC20170410^^^^MRN|ITCC20170410||DOE^JOHN||19581012|M||||||||||1234|111-22-3333 
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Name and type</th>
+      <th>Sample value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>PID-1</td>
+      <td>Set ID - PID (SI)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PID-2</td>
+      <td>Patient ID (CX)</td>
+      <td>ITCC20170410^^^^MRN</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>PID-2.1 ID</td>
+      <td>ITCC20170410</td>
+      <td>Related Patient’s MRN value</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>….</td>
+      <td> </td>
+      <td>PID-2.2 through PID-2.4 empty by default</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>PID-2.5 Identifier Type Code</td>
+      <td>MRN</td>
+      <td>Related Patient’s ID type if requested</td>
+    </tr>
+    <tr>
+      <td>PID-3</td>
+      <td>Patient Identifier List (CX)</td>
+      <td>ITCC20170410</td>
+      <td>Reflects the same value as PID-2.1 by default</td>
+    </tr>
+    <tr>
+      <td>PID-4</td>
+      <td>Alternate Patient ID - PID (CX)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PID-5</td>
+      <td>Patient Name (XPN)</td>
+      <td>DOE^JOHN</td>
+      <td>Related Patient’s family name &amp;given name</td>
+    </tr>
+    <tr>
+      <td>PID-6</td>
+      <td>Mother’s Maiden Name (XPN)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PID-7</td>
+      <td>Date/Time of Birth (TS)</td>
+      <td>19581012</td>
+      <td>Related Patient’s Date of birth; YYYYMMDD format</td>
+    </tr>
+    <tr>
+      <td>PID-8</td>
+      <td>Administrative Sex (IS)</td>
+      <td>M</td>
+      <td>Related patient’s sex (M or F)</td>
+    </tr>
+    <tr>
+      <td>PID-9</td>
+      <td>Patient Alias (XPN)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PID-10</td>
+      <td>Race (CE)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PID-11</td>
+      <td>Patient Address (XAD)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PID-12</td>
+      <td>County Code (IS)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PID-13</td>
+      <td>Phone Number - Home (XTN)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PID-14</td>
+      <td>Phone Number - Business (XTN)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PID-15</td>
+      <td>Primary Language (CE)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PID-16</td>
+      <td>Marital Status (CE)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PID-17</td>
+      <td>Religion (CE)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PID-18</td>
+      <td>Patient Account Number (CX)</td>
+      <td>1234</td>
+      <td>Related Patient’s CSN/Account value/Encounter number</td>
+    </tr>
+    <tr>
+      <td>PID-19</td>
+      <td>SSN Number - Patient (ST)</td>
+      <td>111-22-3333</td>
+      <td>Iris does not store SSN</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="#table-of-contents">back to Table of Contents</a></p>
+
+<h2 id="pv1-segment--patient-visit">PV1 Segment – Patient Visit</h2>
+
+<p>The patient visit segment includes patient-specific visit information.</p>
+
+<h3 id="sample-pv1-segment">Sample PV1 segment:</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PV1|1|O|POC01||||GR0001^DOE^JANE^^^MD^MD^^^^^^NPI|OP0001^DOE^JACK^^^MD^M D^^^^^^NPI|||||||||GR0001^DOE^JANE^^^MD^MD^^^^^^NPI|||||||||||||||||||||||||||20170410145803|20170410145803 
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Name and type</th>
+      <th>Sample value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>PV1-1</td>
+      <td>Set ID - PV1 (SI)</td>
+      <td>1</td>
+      <td>Always 1</td>
+    </tr>
+    <tr>
+      <td>PV1-2</td>
+      <td>Patient Class (IS)</td>
+      <td>O</td>
+      <td>Always “O” (for outpatient)</td>
+    </tr>
+    <tr>
+      <td>PV1-3</td>
+      <td>Assigned Patient Location (PL)</td>
+      <td>POC01</td>
+      <td>Point of care information; received from the ORM HL7 message</td>
+    </tr>
+    <tr>
+      <td>PV1-4</td>
+      <td>Admission Type (IS)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-5</td>
+      <td>Preadmit Number (CX)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-6</td>
+      <td>Prior Patient Location (PL)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-7</td>
+      <td>Attending Doctor (XCN)</td>
+      <td>OP0001^DOE^JACK^^ ^MD^MD^^^^^^NPI</td>
+      <td>This reflects the ordering provider received in the ORM HL7 message</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>PV1-7.1 ID</td>
+      <td>OP0001</td>
+      <td>Reflects the ORM HL7 messageORC-12.1 value</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>PV1-7.2 Family Name</td>
+      <td>DOE</td>
+      <td>Reflects the ORM HL7 messageORC-12.2 value</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>PV1-7.3 Given Name</td>
+      <td>JANE</td>
+      <td>Reflects the ORM HL7 messageORC-12.3 value</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>…..</td>
+      <td> </td>
+      <td>PV1-7.4 &amp; PV1-7.5 empty by default</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>PV1-7.5 Prefix</td>
+      <td>MD</td>
+      <td>Credentials of the ordering physician if available</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>PV1-7.6 Degree</td>
+      <td>MD</td>
+      <td>Credentials of the ordering physician if available</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>…..</td>
+      <td> </td>
+      <td>PV1-7.7 through PV1-7.12 Empty by default</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>PV1-7.13 Identifier Type Code</td>
+      <td>NPI</td>
+      <td>Provider type identifying code; typically “NPI”</td>
+    </tr>
+    <tr>
+      <td>PV1-8</td>
+      <td>Referring Doctor (XCN)</td>
+      <td>OP0001^DOE^JACK^^ ^MD^MD^^^^^^NPI</td>
+      <td>This reflects the ordering provider received in the ORM HL7 message</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>PV1-8.1 ID</td>
+      <td>OP0001</td>
+      <td>Reflects the ORM HL7 messageORC-12.1 value</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>PV1-8.2 Family Name</td>
+      <td>DOE</td>
+      <td>Reflects the ORM HL7 messageORC-12.2 value</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td> </td>
+      <td>PV1-8.3 Given Name</td>
+      <td>JACK</td>
+      <td>Reflects the ORM HL7 messageORC-12.3 value</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>…..</td>
+      <td> </td>
+      <td>PV1-8.4 &amp; PV1-8.5 empty by default</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>PV1-8.5 Prefix</td>
+      <td>MD</td>
+      <td>Credentials of the ordering physician if available</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>PV1-8.6 Degree</td>
+      <td>MD</td>
+      <td>Credentials of the ordering physician if available</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>…..</td>
+      <td> </td>
+      <td>PV1-8.7 through PV1-8.12 Empty by default</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>PV1-8.13 Identifier Type Code</td>
+      <td>NPI</td>
+      <td>Provider type identifying code; typically “NPI”</td>
+    </tr>
+    <tr>
+      <td>PV1-10</td>
+      <td>Hospital Service (IS)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-11</td>
+      <td>Temporary Location (PL)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-12</td>
+      <td>Preadmit Test Indicator (IS)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-13</td>
+      <td>Re-admission Indicator (IS)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-14</td>
+      <td>Admit Source (IS)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-15</td>
+      <td>Ambulatory Status (IS)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-16</td>
+      <td>VIP Indicator (IS)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-17</td>
+      <td>Admitting Doctor (XCN)</td>
+      <td>OP0001^DOE^JACK^^ ^MD^MD^^^^^^NPI</td>
+      <td>This reflects the ordering provider received in the ORM HL7 message</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>PV1-17.1 ID</td>
+      <td>OP0001</td>
+      <td>Reflects the ORM HL7 messageORC-12.1 value</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>PV1-17.2 Family Name</td>
+      <td>DOE</td>
+      <td>Reflects the ORM HL7 messageORC-12.2 value</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>PV1-17.3 Given Name</td>
+      <td>JANE</td>
+      <td>Reflects the ORM HL7 messageORC-12.3 value</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>…..</td>
+      <td> </td>
+      <td>PV1-17.4 &amp; PV1-17.5 empty bydefault</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>PV1-17.5 Prefix</td>
+      <td>MD</td>
+      <td>Credentials of the ordering physician if available</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>PV1-17.6 Degree</td>
+      <td>MD</td>
+      <td>Credentials of the ordering physician if available</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>…..</td>
+      <td> </td>
+      <td>PV1-17.7 through PV1-17.12 Empty by default</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>PV1-17.13 Identifier Type Code</td>
+      <td>NPI</td>
+      <td>Provider type identifying code; typically “NPI”</td>
+    </tr>
+    <tr>
+      <td>PV1-18</td>
+      <td>Patient Type (IS)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-19</td>
+      <td>Visit Number (CX)</td>
+      <td> </td>
+      <td>Related Patient’s CSN/Account value/Encounter number</td>
+    </tr>
+    <tr>
+      <td>PV1-20</td>
+      <td>Financial Class (FC)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td>PV1-21</td>
+      <td>Charge Price Indicator (IS)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-22</td>
+      <td>Courtesy Code (IS)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-23</td>
+      <td>Credit Rating (IS)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-24</td>
+      <td>Contract Code (IS)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-25</td>
+      <td>Contract Effective Date (DT)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-26</td>
+      <td>Contract Amount (NM)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-27</td>
+      <td>Contract Period (NM)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-28</td>
+      <td>Interest Code (IS)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-29</td>
+      <td>Transfer to Bad Debt Code (IS)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-30</td>
+      <td>Transfer to Bad Debt Date (DT)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-31</td>
+      <td>Bad Debt Agency Code (IS)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-32</td>
+      <td>Bad Debt Transfer Amount (NM)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-33</td>
+      <td>Bad Debt Recovery Amount (NM)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-34</td>
+      <td>Delete Account Indicator (IS)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-35</td>
+      <td>Delete Account Date (DT)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-36</td>
+      <td>Discharge Disposition (IS)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-37</td>
+      <td>Discharged to Location (DLD)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-38</td>
+      <td>Diet Type (CE)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-39</td>
+      <td>Servicing Facility (IS)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-40</td>
+      <td>Bed Status (IS)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-41</td>
+      <td>Account Status (IS)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-42</td>
+      <td>Pending Location (PL)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-43</td>
+      <td>Prior Temporary Location (PL)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-44</td>
+      <td>Admit Date/Time (TS)</td>
+      <td>yyyyMMddHHmmss format</td>
+      <td>Date of image captured</td>
+    </tr>
+    <tr>
+      <td>PV1-45</td>
+      <td>Discharge Date/Time (TS)</td>
+      <td>yyyyMMddHHmmss format</td>
+      <td>Date of image captured</td>
+    </tr>
+    <tr>
+      <td>PV1-46</td>
+      <td>Current Patient Balance (NM)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-47</td>
+      <td>Total Charges (NM)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-48</td>
+      <td>Total Adjustments (NM)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-49</td>
+      <td>Total Payments (NM)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-50</td>
+      <td>Alternate Visit ID (CX)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-51</td>
+      <td>Visit Indicator (IS)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>PV1-52</td>
+      <td>Other Healthcare Provider (XCN)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="#table-of-contents">back to Table of Contents</a></p>
+
+<h2 id="orc--common-order">ORC – Common Order</h2>
+
+<p>The Common Order segment is used to transmit fields that are common to all orders. The ORC segment is required in the Order (ORM) message.</p>
+
+<h3 id="sample-orc-segment">Sample ORC segment:</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ORC|RE|2017041006|273013^IRIS||F||||20170410145907|||OP0001^DOE^JACK^^^MD^MD ^^^^^^NPI 
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Name and type</th>
+      <th>Sample value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ORC-1</td>
+      <td>Order Control (ID)</td>
+      <td>RE</td>
+      <td>Always “RE” (Observations/Performed  Service to follow)</td>
+    </tr>
+    <tr>
+      <td>ORC-2</td>
+      <td>Placer Order Number (EI)</td>
+      <td>2017041006</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>ORC-2.1 Entity Identifier</td>
+      <td>2017041006</td>
+      <td>Order number provided in ORM HL7 message</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>ORC-2.2 Namespace ID</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>ORC-3</td>
+      <td>Filler Order Number (EI)</td>
+      <td>273013^IRIS</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>ORC-3.1 Entity Identifier</td>
+      <td>273013</td>
+      <td>Iris’ internal order number; this number is a unique value</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>ORC-3.2 Namespace ID</td>
+      <td>IRIS</td>
+      <td>“IRIS” is used as the default value</td>
+    </tr>
+    <tr>
+      <td>ORC-4</td>
+      <td>Placer Group Number (EI)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>ORC-5</td>
+      <td>Order Status (ID)</td>
+      <td>F</td>
+      <td>“F” (for Final) is used by default;Iris does not send preliminary orcorrected reports.</td>
+    </tr>
+    <tr>
+      <td>ORC-6</td>
+      <td>Response Flag (ID)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>ORC-7</td>
+      <td>Quantity/Timing (TQ)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>ORC-8</td>
+      <td>Parent Order (EIP)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>ORC-9</td>
+      <td>Date/Time of Transaction (TS)</td>
+      <td>yyyyMMddHHmmss format</td>
+      <td>Current time based on server time (UTC if hosted by Iris)</td>
+    </tr>
+    <tr>
+      <td>ORC-10</td>
+      <td>Entered By (XCN)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>ORC-11</td>
+      <td>Verified By (XCN)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>ORC-12</td>
+      <td>Ordering Provider (XCN)</td>
+      <td>OP0001^DOE^JACK^^ ^MD^MD^^^^^^NPI</td>
+      <td>This reflects the ordering provider received in the ORM HL7 message</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>ORC-12.1 ID</td>
+      <td>OP0001</td>
+      <td>Reflects the ORM HL7 message ORC-12.1 value</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>ORC-12.2 Family Name</td>
+      <td>DOE</td>
+      <td>Reflects the ORM HL7 message ORC-12.2 value</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>ORC-12.3 Given Name</td>
+      <td>JACK</td>
+      <td>Reflects the ORM HL7 message ORC-12.3 value</td>
+    </tr>
+    <tr>
+      <td>…..</td>
+      <td> </td>
+      <td>ORdef</td>
+      <td>C-12.4 &amp; ORC-12.5 empty byault</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td>ORC-12.5 P</td>
+      <td>refix MD</td>
+      <td>Crephy</td>
+      <td>dentials of the ordering sician if available</td>
+    </tr>
+    <tr>
+      <td>ORC-12.6 D</td>
+      <td>egree MD</td>
+      <td>Crephy</td>
+      <td>dentials of the ordering sician if available</td>
+    </tr>
+    <tr>
+      <td>…..</td>
+      <td> </td>
+      <td>OREm</td>
+      <td>C-12.7 through ORC-12.12 pty by default</td>
+    </tr>
+    <tr>
+      <td>ORC-12.13 Code</td>
+      <td>Identifier Type NPI</td>
+      <td>Protypi</td>
+      <td>vider type identifying code; cally “NPI”</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="#table-of-contents">back to Table of Contents</a></p>
+
+<h2 id="obr--observation-request">OBR – Observation Request</h2>
+
+<p>The observation request segment transmits information about an exam, diagnostic study, or assessment that is specific to an order or result.</p>
+
+<h3 id="sample-obr-segment">Sample OBR segment:</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OBR|1|2017041006|273013^IRIS|92250^FUNDUS PHOTOGRAPHY^EAP^^FUNDAL PHOTO|||20170410145803|||||||20170410145803||OP0001^DOE^JACK^^^MD^MD^^^^^^NPI||||||20170410145901|||F|||||||GR0001^DOE^JANE^20170410145901^JANE DOE, MD,NPI: 1234567890, Taxonomy: 207W00000X 
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Name and type</th>
+      <th>Sample value</th>
+      <th>Description</th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>OBR-1</td>
+      <td>Set ID - OBR (SI)</td>
+      <td>1</td>
+      <td>Always “1”; Iris never sends multiple OBR segments</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>OBR-2</td>
+      <td>Placer Order Number (EI)</td>
+      <td>2017041006</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBR-2.1 Entity Identifier</td>
+      <td>2017041006</td>
+      <td>Order number provided in ORMHL7 message</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBR-2.2 Namespace ID</td>
+      <td> </td>
+      <td>Empty by default</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>OBR-3</td>
+      <td>Filler Order Number (EI)</td>
+      <td>273013^IRIS</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBR-3.1 Entity Identifier</td>
+      <td>273013</td>
+      <td>Iris’ internal order number. Thisnumber is unique value.</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBR-3.2 Namespace ID</td>
+      <td>IRIS</td>
+      <td>“IRIS” is used as the default value</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>OBR-4</td>
+      <td>Universal Service Identifier (CE)</td>
+      <td>92250^FUNDUS PHOTOGRAPHY ^EAP^^FUNDAL PHOTO</td>
+      <td>CPT code in OBR.4.1 followed bythe description in OBR.4.2. This value is populated with the values present in the creating ORM message unless otherwiserequested.  See below for Sample examples</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td>EAP777357^Ophthalmology Retinal Scan</td>
+      <td>Sample 1</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td>57554^DIABETIC EYE EXAM IN OFFICE ^IRISEAP^^DIABETIC EYE EXAM IN OFFICE</td>
+      <td>Sample 2</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td>IMG0555^DIABETIC RETINAL SCREENING (IRIS CAMERA) ^MRGECP^^DIABETIC RETINAL SCREENING</td>
+      <td>Sample 3</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td>OPH112^IRIS RETINAL ASSESSMENT^LAB^^OPH94</td>
+      <td>Sample 4</td>
+      <td> </td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td>OBR-5</td>
+      <td>Priority (ID)</td>
+      <td> </td>
+      <td>Empty by default</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>OBR-6</td>
+      <td>Requested Date/Time (TS)</td>
+      <td> </td>
+      <td>Empty by default</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>OBR-7</td>
+      <td>Observation Date/Time # (TS)</td>
+      <td>yyyyMMddHHmmss format</td>
+      <td>Date of image capture</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>OBR-8</td>
+      <td>Observation End Date/Time # (TS)</td>
+      <td> </td>
+      <td>Empty by default</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>OBR-9</td>
+      <td>Collection Volume (CQ)</td>
+      <td> </td>
+      <td>Empty by default</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>OBR-10</td>
+      <td>Collector Identifier (XCN)</td>
+      <td> </td>
+      <td>Empty by default</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>OBR-11</td>
+      <td>Specimen Action Code (ID)</td>
+      <td> </td>
+      <td>Empty by default</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>OBR-12</td>
+      <td>Danger Code (CE)</td>
+      <td> </td>
+      <td>Empty by default</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>OBR-13</td>
+      <td>Relevant Clinical Info. (ST)</td>
+      <td> </td>
+      <td>Empty by default</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>OBR-14</td>
+      <td>Specimen Received Date/Time (TS)</td>
+      <td>yyyyMMddHHmmss format</td>
+      <td>Date of image capture</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>OBR-15</td>
+      <td>Specimen Source (SPS)</td>
+      <td> </td>
+      <td>Empty by default</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>OBR-16</td>
+      <td>Ordering Provider (XCN)</td>
+      <td>OP0001^DOE^JACK^^ ^MD^MD^^^^^^NPI</td>
+      <td>Same value as ORC-12</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>OBR-17</td>
+      <td>Order Callback Phone Number (XTN)</td>
+      <td> </td>
+      <td>Empty by default</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>OBR-18</td>
+      <td>Placer Field 1 (ST)</td>
+      <td> </td>
+      <td>Empty by default</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>OBR-19</td>
+      <td>Placer Field 2 (ST)</td>
+      <td> </td>
+      <td>Empty by default</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>OBR-20</td>
+      <td>Filler Field 1 (ST)</td>
+      <td> </td>
+      <td>Empty by default</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>OBR-21</td>
+      <td>Filler Field 2 (ST)</td>
+      <td> </td>
+      <td>Empty by default</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>OBR-22</td>
+      <td>Results Report/Status Change - Date/Time (TS)</td>
+      <td>yyyyMMddHHmmss format</td>
+      <td>Date of grading (signing)</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>OBR-23</td>
+      <td>Charge to Practice (MOC)</td>
+      <td> </td>
+      <td>Empty by default</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>OBR-24</td>
+      <td>Diagnostic Serv Sect ID (ID)</td>
+      <td> </td>
+      <td>Empty by default</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>OBR-25</td>
+      <td>Result Status (ID)</td>
+      <td>F</td>
+      <td>F = Final, C = Corrected*</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>OBR-26</td>
+      <td>Parent Result (PRL)</td>
+      <td> </td>
+      <td>Empty by default</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>OBR-27</td>
+      <td>Quantity/Timing (TQ)</td>
+      <td> </td>
+      <td>Empty by default</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>OBR-28</td>
+      <td>Result Copies To (XCN)</td>
+      <td> </td>
+      <td>Empty by default</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>OBR-29</td>
+      <td>Parent Number (EIP)</td>
+      <td> </td>
+      <td>Empty by default</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>OBR-30</td>
+      <td>Transportation Mode (ID)</td>
+      <td> </td>
+      <td>Empty by default</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>OBR-31</td>
+      <td>Reason for Study (CE)</td>
+      <td> </td>
+      <td>Empty by default</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>OBR-32</td>
+      <td>Principal Result Interpreter (NDL)</td>
+      <td>GR0001^DOE^JANE ^20170410145901^JANE DOE, MD, NPI: 1234567890, Taxonomy: 207W00000X</td>
+      <td>The default configuration is tosend the grader’s informationhere.</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBR-32.1</td>
+      <td>GR0001</td>
+      <td>Grader ID in IRIS</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBR-32.2</td>
+      <td>DOE</td>
+      <td>Grader Family Name</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBR-32.3</td>
+      <td>JANE</td>
+      <td>Grader Given Name</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBR-32.4</td>
+      <td>yyyyMMddHHmmss format</td>
+      <td>Date of grading (signing)</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBR-32.5</td>
+      <td>JANE1234207W</td>
+      <td>DOE, MD, NPI: 567890, Taxonomy: 00000X</td>
+      <td>The grader’s full name withcredentials</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><em>Iris does not send preliminary or corrected reports but upon request can send a status of “C” when a report has been sent back to be regraded. These are not corrected reports but instead a new report for the existing order.</em></p>
+
+<h2 id="dg1-segment--diagnosis">DG1 Segment – Diagnosis</h2>
+
+<p><em>Optional</em>
+This is the diagnosis segment that can be used to send multiple diagnoses. This can be generated upon request but is otherwise not part of the Iris standard ORU HL7 message.</p>
+
+<h3 id="sample-dg1-segment">Sample DG1 segment:</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DG1|1||E1141^Type 2 diabetes mellitus with diabetic mononeuropathy^ICD10 
+DG1|2||E113291^Type 2 diabetes mellitus with mild nonproliferative diabetic retinopathy without macular edema, right eye^ICD10 without macular edema, right eye^ICD10 
+DG1|3||E113512^Type 2 diabetes mellitus with proliferative diabetic retinopathy with macular edema, left eye^ICD10 
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Name and type</th>
+      <th>Sample value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>DG1-1</td>
+      <td>Set ID - DG1 (SI)</td>
+      <td>1</td>
+      <td>The Set ID that corresponds with the number of diagnoses</td>
+    </tr>
+    <tr>
+      <td>DG1-2</td>
+      <td>Diagnosis Coding Method (ID)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>DG1-3</td>
+      <td>Diagnosis Code (CE)</td>
+      <td>E1141^Type 2 diabetes mellitus with diabetic mononeuropathy^ICD10</td>
+      <td>This reflects the diagnoses added after the image has been graded</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>DG1-3.1 Identifier</td>
+      <td>E1141</td>
+      <td>ICD10 code for diagnosis</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>DG1-3.2 Text</td>
+      <td>Type 2 diabetes mellitus with diabetic mononeuropathy</td>
+      <td>Description of diagnosis code</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>DG1-3.3 Name of Coding System</td>
+      <td>ICD10</td>
+      <td>The coding system: Iris currentlyutilizes ICD10</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="#table-of-contents">back to Table of Contents</a></p>
+
+<h2 id="obx--observation-result-segment">OBX – Observation Result Segment</h2>
+
+<p>The observation result segment is used to transmit a single observation or observation fragment. OBX segments can repeat and each one contains following information.</p>
+
+<p>IRIS’ default OBX HL7 configuration contains the discrete results in the first 9 OBX segments, followed by the textual portion of the result findings, and then the document modality. The breakdown follows this configuration (the numbers refer to the Set ID): OBX 1 contains the overall severity for discrete findings of both eyes, OBX 2-5 contain details of the right eye, OBX 6-9 contain details of the left eye, OBX 10-30 grading results, and the last OBX is where either an encoded PDF or pointer link (static URL) is sent.</p>
+
+<h3 id="sample-discrete-results-default">Sample Discrete Results (Default):</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OBX|1|ST|SEVERITY^^IRIS|1|NORMAL||||||F 
+OBX|2|ST|RIGHTDIABRETIN^^IRIS|2|None||||||F 
+OBX|3|ST|RIGHTMACEDEMA^^IRIS|3|None||||||F 
+OBX|4|ST|RIGHTOTHERRETIN^^IRIS|4|None||||||F 
+OBX|5|ST|RIGHTQUALAPP^^IRIS|5|Gradable Image||||||F 
+OBX|6|ST|LEFTDIABRETIN^^IRIS|6|None||||||F 
+OBX|7|ST|LEFTMACEDEMA^^IRIS|7|None||||||F 
+OBX|8|ST|LEFTOTHERRETIN^^IRIS|8|None||||||F 
+OBX|9|ST|LEFTQUALAPP^^IRIS|9|Gradable Image||||||F 
+</code></pre></div></div>
+
+<h3 id="sample-discrete-results-with-alternating-obxnte-segments-secondary-option">Sample Discrete Results with Alternating OBX/NTE segments (Secondary Option):</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OBX|1|ST|^^IRIS|1|NORMAL|||
+NTE|1|ST|SEVERITY 
+OBX|2|ST|^^IRIS|2|None||||||F
+NTE|1|ST|RIGHTDIABRETIN
+OBX|3|ST|^^IRIS|3|None||||||F 
+NTE|1|ST|RIGHTMACEDEMA 
+OBX|4|ST|^^IRIS|4|None||||||F 
+NTE|1|ST|RIGHTOTHERRETIN 
+OBX|5|ST|RIGHTQUALAPP^^IRIS|5|Gradable Image||||||F 
+OBX|6|ST|^^IRIS|6|None||||||F 
+NTE|1|ST|LEFTDIABRETIN 
+OBX|7|ST|^^IRIS|7|None||||||F 
+NTE|1|ST|LEFTMACEDEMA 
+OBX|8|ST|^^IRIS|8|None||||||F 
+NTE|1|ST|LEFTOTHERRETIN 
+OBX|9|ST|LEFTQUALAPP^^IRIS|9|Gradable Image||||||F 
+</code></pre></div></div>
+
+<h2 id="first-obx">First OBX</h2>
+<p>Severity section</p>
+
+<h3 id="sample-obx-segment-first-obx">Sample OBX segment: First OBX</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OBX|1|ST|SEVERITY^^IRIS|1|NORMAL||||||F
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Name and type</th>
+      <th>Sample value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>OBX-1</td>
+      <td>Set ID - OBX (SI)</td>
+      <td>1</td>
+      <td>Increases sequentially by 1</td>
+    </tr>
+    <tr>
+      <td>OBX-2</td>
+      <td>Value Type (ID)</td>
+      <td>ST</td>
+      <td>The literal value “ST” (i.e. String for OBX-5)</td>
+    </tr>
+    <tr>
+      <td>OBX-3</td>
+      <td>Observation Identifier (CE)</td>
+      <td>SEVERITY^^IRIS</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-3.1 Identifier</td>
+      <td>SEVERITY</td>
+      <td>The literal value “SEVERITY”</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-3.2 Text</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-3.3 Name of Coding System</td>
+      <td>IRIS</td>
+      <td>The literal value “IRIS”</td>
+    </tr>
+    <tr>
+      <td>OBX-4</td>
+      <td>Observation Sub-Id (ST)</td>
+      <td>1</td>
+      <td>Sequential counter that matches the Set ID</td>
+    </tr>
+    <tr>
+      <td>OBX-5</td>
+      <td>Observation Value (Varies)</td>
+      <td>CRITICAL</td>
+      <td>One of three values based on the result findings: NORMAL, ALERT, or CRITICAL</td>
+    </tr>
+    <tr>
+      <td>OBX-6</td>
+      <td>Units (CE)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-7</td>
+      <td>References Range (ST)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-8</td>
+      <td>Abnormal Flags (IS)</td>
+      <td>AA</td>
+      <td>One of three values based on the result findings: empty (Normal), A (ALERT), or AA (CRITICAL)</td>
+    </tr>
+    <tr>
+      <td>OBX-9</td>
+      <td>Probability (NM)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-10</td>
+      <td>Nature of Abnormal Test (ID)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-11</td>
+      <td>Observation Result Status (ID)</td>
+      <td>F</td>
+      <td>F = Final, C = Corrected*</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="#table-of-contents">back to Table of Contents</a></p>
+
+<h2 id="second-obx">Second OBX</h2>
+
+<h3 id="sample-obx-segment">Sample OBX segment:</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OBX|2|ST|RIGHTDIABRETIN^^IRIS|2|None||||||F
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Name and type</th>
+      <th>Sample value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>OBX-1</td>
+      <td>Set ID - OBX (SI)</td>
+      <td>2</td>
+      <td>Increase sequentially by 1</td>
+    </tr>
+    <tr>
+      <td>OBX-2</td>
+      <td>Value Type (ID)</td>
+      <td>ST</td>
+      <td>Always “ST” (i.e. String for OBX- 5)</td>
+    </tr>
+    <tr>
+      <td>OBX-3</td>
+      <td>Observation Identifier (CE)</td>
+      <td>RIGHTDIABRETIN^^IRIS</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-3.1 Identifier</td>
+      <td>RIGHTDIABRETIN</td>
+      <td>Always “RIGHTDIABRETIN”; stands for RIGHT eye diabetic retinopathy</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-3.2 Text</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-3.3 Name of Coding System</td>
+      <td>IRIS</td>
+      <td>Always “IRIS”</td>
+    </tr>
+    <tr>
+      <td>OBX-4</td>
+      <td>Observation Sub-Id (ST)</td>
+      <td>2</td>
+      <td>Sequential counter that matches the Set ID</td>
+    </tr>
+    <tr>
+      <td>OBX-5</td>
+      <td>Observation Value (Varies)</td>
+      <td>None</td>
+      <td>One of three values based on the result findings: None, Mild, Moderate, Severe, or Proliferative</td>
+    </tr>
+    <tr>
+      <td>OBX-6</td>
+      <td>Units (CE)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-7</td>
+      <td>References Range (ST)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-8</td>
+      <td>Abnormal Flags (IS)</td>
+      <td> </td>
+      <td>One of three values based on the result findings: empty (Normal), A (ALERT), or AA (CRITICAL)</td>
+    </tr>
+    <tr>
+      <td>OBX-9</td>
+      <td>Probability (NM)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-10</td>
+      <td>Nature of Abnormal Test (ID)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-11</td>
+      <td>Observation Result Status (ID)</td>
+      <td>F</td>
+      <td>F = Final, C = Corrected*</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="#table-of-contents">back to Table of Contents</a></p>
+
+<h2 id="third-obx">Third OBX</h2>
+
+<h3 id="sample-obx-segment-third">Sample OBX segment: Third</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OBX|3|ST|RIGHTMACEDEMA^^IRIS|3|Severe|||AA|||F 
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Name and type</th>
+      <th>Sample value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>OBX-1</td>
+      <td>Set ID - OBX (SI)</td>
+      <td>3</td>
+      <td>Increase sequentially by 1</td>
+    </tr>
+    <tr>
+      <td>OBX-2</td>
+      <td>Value Type (ID)</td>
+      <td>ST</td>
+      <td>Always “ST” (i.e. String for OBX- 5)</td>
+    </tr>
+    <tr>
+      <td>OBX-3</td>
+      <td>Observation Identifier (CE)</td>
+      <td>RIGHTMACEDEMA^^IRIS</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-3.1 Identifier</td>
+      <td>RIGHTMACEDEMA</td>
+      <td>Always “RIGHTMACEDEMA”; stands for RIGHT eye macular edema</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-3.2 Text</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-3.3 Name of Coding System</td>
+      <td>IRIS</td>
+      <td>Always “IRIS”</td>
+    </tr>
+    <tr>
+      <td>OBX-4</td>
+      <td>Observation Sub-Id (ST)</td>
+      <td>3</td>
+      <td>Sequential counter that matches the Set ID</td>
+    </tr>
+    <tr>
+      <td>OBX-5</td>
+      <td>Observation Value (Varies)</td>
+      <td>Severe</td>
+      <td>One of three values based on the result findings: None, Mild, Moderate, or Severe</td>
+    </tr>
+    <tr>
+      <td>OBX-6</td>
+      <td>Units (CE)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-7</td>
+      <td>References Range (ST)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-8</td>
+      <td>Abnormal Flags (IS)</td>
+      <td>AA</td>
+      <td>One of three values based on the result findings: empty (Normal), A (ALERT), or AA (CRITICAL)</td>
+    </tr>
+    <tr>
+      <td>OBX-9</td>
+      <td>Probability (NM)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-10</td>
+      <td>Nature of Abnormal Test (ID)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-11</td>
+      <td>Observation Result Status (ID)</td>
+      <td>F</td>
+      <td>F = Final, C = Corrected*</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="#table-of-contents">back to Table of Contents</a></p>
+
+<h2 id="fourth-obx">Fourth OBX</h2>
+
+<h3 id="sample-obx-segment-1">Sample OBX segment:</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OBX|4|ST|RIGHTOTHERRETIN^^IRIS|4|None||||||F
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Name and type</th>
+      <th>Sample value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>OBX-1</td>
+      <td>Set ID - OBX (SI)</td>
+      <td>4</td>
+      <td>Increase sequentially by 1</td>
+    </tr>
+    <tr>
+      <td>OBX-2</td>
+      <td>Value Type (ID)</td>
+      <td>ST</td>
+      <td>Always “ST” (i.e. String for OBX- 5)</td>
+    </tr>
+    <tr>
+      <td>OBX-3</td>
+      <td>Observation Identifier (CE)</td>
+      <td>RIGHTOTHERRETIN^^IRIS</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-3.1 Identifier</td>
+      <td>RIGHTOTHERRETIN</td>
+      <td>Always “RIGHTOTHERRETIN”; stands for RIGHT eye OTHER retinopathy</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-3.2 Text</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-3.3 Name of Coding System</td>
+      <td>IRIS</td>
+      <td>Always “IRIS”</td>
+    </tr>
+    <tr>
+      <td>OBX-4</td>
+      <td>Observation Sub-Id (ST)</td>
+      <td>4</td>
+      <td>Sequential counter that matches the Set ID</td>
+    </tr>
+    <tr>
+      <td>OBX-5</td>
+      <td>Observation Value (Varies)</td>
+      <td>None, Suspected Glaucoma, Suspected Dry AMD, Suspected Wet AMD, Suspected Vein Occlusion, Suspected HTN Retinopathy, Suspected Epiretinal Membrane, Suspected Macular Hole, Suspected Cataracts, Suspected Geographic Atrophy, Other  based on result.</td>
+      <td>Providers can choose to apply a predefined description (see Sample Value) or populate with a free-text note</td>
+    </tr>
+    <tr>
+      <td>OBX-6</td>
+      <td>Units (CE)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-7</td>
+      <td>References Range (ST)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-8</td>
+      <td>Abnormal Flags (IS)</td>
+      <td> </td>
+      <td>One of three values based on the result findings: empty (Normal), or A (ALERT)</td>
+    </tr>
+    <tr>
+      <td>OBX-9</td>
+      <td>Probability (NM)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-10</td>
+      <td>Nature of Abnormal Test (ID)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-11</td>
+      <td>Observation Result Status (ID)</td>
+      <td>F</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="#table-of-contents">back to Table of Contents</a></p>
+
+<h2 id="fifth-obx">Fifth OBX</h2>
+
+<h3 id="sample-obx-segment-2">Sample OBX segment:</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OBX|5|ST|RIGHTQUALAPP^^IRIS|5|Gradeable Image||||||F 
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Name and type</th>
+      <th>Sample value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>OBX-1</td>
+      <td>Set ID - OBX (SI)</td>
+      <td>5</td>
+      <td>Increase sequentially by 1</td>
+    </tr>
+    <tr>
+      <td>OBX-2</td>
+      <td>Value Type (ID)</td>
+      <td>ST</td>
+      <td>Always “ST” (i.e. String for OBX- 5)</td>
+    </tr>
+    <tr>
+      <td>OBX-3</td>
+      <td>Observation Identifier (CE)</td>
+      <td>RIGHTQUALAPP^^IRIS</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-3.1 Identifier</td>
+      <td>RIGHTQUALAPP</td>
+      <td>Always “RIGHTQUALAPP”; stands for RIGHT eye image quality.</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-3.2 Text</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-3.3 Name of Coding System</td>
+      <td>IRIS</td>
+      <td>Always “IRIS”</td>
+    </tr>
+    <tr>
+      <td>OBX-4</td>
+      <td>Observation Sub-Id (ST)</td>
+      <td>5</td>
+      <td>Sequential counter that matches the Set ID</td>
+    </tr>
+    <tr>
+      <td>OBX-5</td>
+      <td>Observation Value (Varies)</td>
+      <td>Gradable Image</td>
+      <td>Either “Gradable Image” or “Not Gradable Image” based on the image quality</td>
+    </tr>
+    <tr>
+      <td>OBX-6</td>
+      <td>Units (CE)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-7</td>
+      <td>References Range (ST)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-8</td>
+      <td>Abnormal Flags (IS)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-9</td>
+      <td>Probability (NM)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-10</td>
+      <td>Nature of Abnormal Test (ID)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-11</td>
+      <td>Observation Result Status (ID)</td>
+      <td>F</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="#table-of-contents">back to Table of Contents</a></p>
+
+<h2 id="sixth-obx">Sixth OBX</h2>
+
+<h3 id="sample-obx-segment-3">Sample OBX segment:</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OBX|6|ST|LEFTDIABRETIN^^IRIS|6|Proliferative|||AA|||F 
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Name and type</th>
+      <th>Sample value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>OBX-1</td>
+      <td>Set ID - OBX (SI)</td>
+      <td>6</td>
+      <td>Increase sequentially by 1</td>
+    </tr>
+    <tr>
+      <td>OBX-2</td>
+      <td>Value Type (ID)</td>
+      <td>ST</td>
+      <td>Always “ST” (i.e. String for OBX- 5)</td>
+    </tr>
+    <tr>
+      <td>OBX-3</td>
+      <td>Observation Identifier (CE)</td>
+      <td>LEFTDIABRETIN^^IRIS</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-3.1 Identifier</td>
+      <td>LEFTDIABRETIN</td>
+      <td>Always “LEFTDIABRETIN”; stands for LEFT eye diabetic retinopathy</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-3.2 Text</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-3.3 Name of Coding System</td>
+      <td>IRIS</td>
+      <td>Always “IRIS”</td>
+    </tr>
+    <tr>
+      <td>OBX-4</td>
+      <td>Observation Sub-Id (ST)</td>
+      <td>6</td>
+      <td>Sequential counter that matches the Set ID</td>
+    </tr>
+    <tr>
+      <td>OBX-5</td>
+      <td>Observation Value (Varies)</td>
+      <td>Proliferative</td>
+      <td>One of three values based on the result findings: None, Mild, Moderate, Severe, or Proliferative</td>
+    </tr>
+    <tr>
+      <td>OBX-6</td>
+      <td>Units (CE)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-7</td>
+      <td>References Range (ST)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-8</td>
+      <td>Abnormal Flags (IS)</td>
+      <td>AA</td>
+      <td>One of three values based on the result findings: empty (Normal), A (ALERT), or AA (CRITICAL)</td>
+    </tr>
+    <tr>
+      <td>OBX-9</td>
+      <td>Probability (NM)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-10</td>
+      <td>Nature of Abnormal Test (ID)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-11</td>
+      <td>Observation Result Status (ID)</td>
+      <td>F</td>
+      <td>F = Final, C = Corrected*</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="#table-of-contents">back to Table of Contents</a></p>
+
+<h2 id="seventh-obx">Seventh OBX</h2>
+
+<h3 id="sample-obx-segment-seventh-obx">Sample OBX segment: Seventh OBX</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OBX|7|ST|LEFTMACEDEMA^^IRIS|7|None||||||F 
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Name and type</th>
+      <th>Sample value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>OBX-1</td>
+      <td>Set ID - OBX (SI)</td>
+      <td>7</td>
+      <td>Increase sequentially by 1</td>
+    </tr>
+    <tr>
+      <td>OBX-2</td>
+      <td>Value Type (ID)</td>
+      <td>ST</td>
+      <td>Always “ST” (i.e. String for OBX- 5)</td>
+    </tr>
+    <tr>
+      <td>OBX-3</td>
+      <td>Observation Identifier (CE)</td>
+      <td>LEFTMACEDEMA^^IRIS</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-3.1 Identifier</td>
+      <td>LEFTMACEDEMA</td>
+      <td>Always “LEFTMACEDEMA”; stands for LEFT eye macular edema</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-3.2 Text</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-3.3 Name of Coding System</td>
+      <td>IRIS</td>
+      <td>Always “IRIS”</td>
+    </tr>
+    <tr>
+      <td>OBX-4</td>
+      <td>Observation Sub-Id (ST)</td>
+      <td>7</td>
+      <td>Sequential counter that matches the Set ID</td>
+    </tr>
+    <tr>
+      <td>OBX-5</td>
+      <td>Observation Value (Varies)</td>
+      <td>None</td>
+      <td>One of three values based on the result findings: None, Mild, Moderate, or Severe</td>
+    </tr>
+    <tr>
+      <td>OBX-6</td>
+      <td>Units (CE)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-7</td>
+      <td>References Range (ST)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-8</td>
+      <td>Abnormal Flags (IS)</td>
+      <td> </td>
+      <td>One of three values based on the result findings: empty (Normal), A (ALERT), or AA (CRITICAL)</td>
+    </tr>
+    <tr>
+      <td>OBX-9</td>
+      <td>Probability (NM)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-10</td>
+      <td>Nature of Abnormal Test (ID)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-11</td>
+      <td>Observation Result Status (ID)</td>
+      <td>F</td>
+      <td>F = Final, C = Corrected*</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="#table-of-contents">back to Table of Contents</a></p>
+
+<h2 id="eighth-obx">Eighth OBX</h2>
+
+<h3 id="sample-obx-segment-4">Sample OBX segment:</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OBX|8|ST|LEFTOTHERRETIN^^IRIS|8|None||||||F 
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Name and type</th>
+      <th>Sample value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>OBX-1</td>
+      <td>Set ID - OBX (SI)</td>
+      <td>8</td>
+      <td>Increase sequentially by 1</td>
+    </tr>
+    <tr>
+      <td>OBX-2</td>
+      <td>Value Type (ID)</td>
+      <td>ST</td>
+      <td>Always “ST” (i.e. String for OBX-5)</td>
+    </tr>
+    <tr>
+      <td>OBX-3</td>
+      <td>Observation Identifier (CE)</td>
+      <td>LEFTOTHERRETIN^^IRIS</td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-3.1 Identifier</td>
+      <td>LEFTOTHERRETIN</td>
+      <td>Always “LEFTOTHERRETIN”. Identify this OBX as a Left eye other retinopathy.</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-3.2 Text</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-3.3 Name of Coding System</td>
+      <td>IRIS</td>
+      <td>Always “IRIS”</td>
+    </tr>
+    <tr>
+      <td>OBX-4</td>
+      <td>Observation Sub-Id (ST)</td>
+      <td>8</td>
+      <td>Sequential counter that matches the Set ID</td>
+    </tr>
+    <tr>
+      <td>OBX-5</td>
+      <td>Observation Value (Varies)</td>
+      <td>None, Suspected Glaucoma, Suspected Dry AMD, Suspected Wet AMD, Suspected Vein Occlusion, Suspected HTN Retinopathy, Suspected Epiretinal Membrane, Suspected Macular Hole, Suspected Cataracts, Suspected Geographic Atrophy, Other  based on result.</td>
+      <td>Providers can choose to apply a predefined description (see Sample Value) or populate with a free-text note</td>
+    </tr>
+    <tr>
+      <td>OBX-6</td>
+      <td>Units (CE)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-7</td>
+      <td>References Range (ST)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-8</td>
+      <td>Abnormal Flags (IS)</td>
+      <td> </td>
+      <td>One of three values based on the result findings: empty (Normal), or A (ALERT)</td>
+    </tr>
+    <tr>
+      <td>OBX-9</td>
+      <td>Probability (NM)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-10</td>
+      <td>Nature of Abnormal Test (ID)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-11</td>
+      <td>Observation Result Status (ID)</td>
+      <td>F</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="#table-of-contents">back to Table of Contents</a></p>
+
+<h2 id="ninth-obx">Ninth OBX</h2>
+
+<h3 id="sample-obx-segment-5">Sample OBX segment:</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OBX|9|ST|LEFTQUALAPP^^IRIS|9|Gradeable Image||||||F 
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Name and type</th>
+      <th>Sample value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>OBX-1</td>
+      <td>Set ID - OBX (SI)</td>
+      <td>9</td>
+      <td>Increase sequentially by 1</td>
+    </tr>
+    <tr>
+      <td>OBX-2</td>
+      <td>Value Type (ID)</td>
+      <td>ST</td>
+      <td>Always “ST” (i.e. String for OBX- 5)</td>
+    </tr>
+    <tr>
+      <td>OBX-3</td>
+      <td>Observation Identifier (CE)</td>
+      <td>LEFTQUALAPP^^IRIS</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-3.1 Identifier</td>
+      <td>LEFTQUALAPP</td>
+      <td>Always “LEFTQUALAPP”; stands for LEFT eye image quality</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-3.2 Text</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-3.3 Name of Coding System</td>
+      <td>IRIS</td>
+      <td>Always “IRIS”</td>
+    </tr>
+    <tr>
+      <td>OBX-4</td>
+      <td>Observation Sub-Id (ST)</td>
+      <td>9</td>
+      <td>Sequential counter that matches the Set ID</td>
+    </tr>
+    <tr>
+      <td>OBX-5</td>
+      <td>Observation Value (Varies)</td>
+      <td>Gradable Image</td>
+      <td>Either “Gradable Image” or “Not Gradable Image” based on the image quality</td>
+    </tr>
+    <tr>
+      <td>OBX-6</td>
+      <td>Units (CE)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-7</td>
+      <td>References Range (ST)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-8</td>
+      <td>Abnormal Flags (IS)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-9</td>
+      <td>Probability (NM)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-10</td>
+      <td>Nature of Abnormal Test (ID)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-11</td>
+      <td>Observation Result Status (ID)</td>
+      <td>F</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="#table-of-contents">back to Table of Contents</a></p>
+
+<h2 id="tenth-through-second-to-last-obx">Tenth Through Second-to-Last OBX</h2>
+
+<p>Sample OBX segment (default):</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OBX|10|FT|Result^^IRIS|001|Retinal Study Result for DOE, JOHN||||||F 
+OBX|11|FT|Result^^IRIS|002|||||||F 
+OBX|12|FT|Result^^IRIS|003|DOE, JOHN, a 58 y/o, M (DOB: 10-12-1958, MRN:ITCC20170410)||||||F 
+OBX|28|FT|Result^^IRIS|019|This result was electronically signed by DOE, JANE, MD on 04-102017 09:59:02 UTC time.||||||F 
+OBX|29|FT|Result^^IRIS|020|||||||F 
+OBX|30|FT|Result^^IRIS|021|NOTE: Any pathology noted on this diabetic retinal evaluation should be confirmed by an appropriate ophthalmic examination.||||||F 
+</code></pre></div></div>
+<p>Secondary Option (Single OBX): Iris can send the text results can be sent in a single OBX segment</p>
+
+<p>Tertiary Option (NTE Segments): Iris can send the text results as NTE segments instead of OBX segments</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Name and type</th>
+      <th>Sample value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>OBX-1</td>
+      <td>Set ID - OBX (SI)</td>
+      <td>10</td>
+      <td>Increase sequentially by 1</td>
+    </tr>
+    <tr>
+      <td>OBX-2</td>
+      <td>Value Type (ID)</td>
+      <td>FT</td>
+      <td>Formatted Text, but can be defined differently like “ST” if  necessary</td>
+    </tr>
+    <tr>
+      <td>OBX-3</td>
+      <td>Observation Identifier (CE)</td>
+      <td>Result^^IRIS</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-3.1 Identifier</td>
+      <td>Result</td>
+      <td>“Result” but can be defined withother value if necessary</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-3.2 Text</td>
+      <td> </td>
+      <td>Usually be empty but can be defined with any value if necessary</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-3.3 Name of Coding System</td>
+      <td>IRIS</td>
+      <td>“IRIS” is used as the default value</td>
+    </tr>
+    <tr>
+      <td>OBX-4</td>
+      <td>Observation Sub-Id (ST)</td>
+      <td>001</td>
+      <td>Grading specific identifier; this number increases sequentially by 1 for each additional OBX segment</td>
+    </tr>
+    <tr>
+      <td>OBX-5</td>
+      <td>Observation Value (Varies)</td>
+      <td> </td>
+      <td>All the text from the Iris report will be displayed here on its own OBX line. Carriage returns will also receive their own OBX segment.</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td>OBX-6</td>
+      <td>Units (CE)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-7</td>
+      <td>References Range (ST)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-8</td>
+      <td>Abnormal Flags (IS)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-9</td>
+      <td>Probability (NM)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-10</td>
+      <td>Nature of Abnormal Test (ID)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-11</td>
+      <td>Observation Result Status (ID)</td>
+      <td>F</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="#table-of-contents">back to Table of Contents</a></p>
+
+<h2 id="last-obx">Last OBX</h2>
+<p><em>Reference Pointer Option</em></p>
+
+<h3 id="sample-obx-segment-6">Sample OBX segment:</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OBX|31|RP|LINK^^PDFLINK|31|https://api.retinalscreenings.com/api/PatientOrders/GetSingle ResultForDisplayInEmr?patientOrderId=273013&amp;asPdf=True&amp;isPreliminary=False&amp;auth=257805B4B262A18271B60A62026671703D0F3F335DC9E0643662358952E7DCBA19C1C2CCC6C781A3444D651C0AC6695750DA87C9A5CE0F5976E8A206D9FB1915||||||F 
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Name and type</th>
+      <th>Sample value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>OBX-1</td>
+      <td>Set ID - OBX (SI)</td>
+      <td>31</td>
+      <td>Increase sequentially by 1</td>
+    </tr>
+    <tr>
+      <td>OBX-2</td>
+      <td>Value Type (ID)</td>
+      <td>RP</td>
+      <td>Reference Pointer (RP): used when a pointer URL is configured</td>
+    </tr>
+    <tr>
+      <td>OBX-3</td>
+      <td>Observation Identifier (CE)</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Reference Pointer (RP) Configuration</td>
+      <td>LINK^^PDFLINK</td>
+      <td>This is the default delivery method</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-3.1 Identifier</td>
+      <td>LINK</td>
+      <td>“LINK” is the default value</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-3.2 Text</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-3.3 Name of Coding System</td>
+      <td>PDFLINK</td>
+      <td>“PDFLINK” is used as the default value</td>
+    </tr>
+    <tr>
+      <td>OBX-4</td>
+      <td>Observation Sub-Id (ST)</td>
+      <td>31</td>
+      <td>Sequential counter that corresponds with the Set ID</td>
+    </tr>
+    <tr>
+      <td>OBX-5</td>
+      <td>Observation Value (Varies)</td>
+      <td> </td>
+      <td>This is a link to the PDF stored in Iris</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-5.1 Reference Pointer</td>
+      <td>See Note 1.0 Below</td>
+      <td>See Note 1.1 Below</td>
+    </tr>
+    <tr>
+      <td>OBX-6</td>
+      <td>Units (CE)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-7</td>
+      <td>References Range (ST)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-8</td>
+      <td>Abnormal Flags (IS)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-9</td>
+      <td>Probability (NM)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-10</td>
+      <td>Nature of Abnormal Test (ID)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-11</td>
+      <td>Observation Result Status (ID)</td>
+      <td>F</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Note 1.0:</p>
+
+<h2 id="example-url">Example URL:</h2>
+
+<p>https://api.retinalscreenings.com/api/PatientOrders/GetSingleResultForDisplayIn Emr?patientOrderId=12345&amp;asPdf=True&amp;isPreliminary=False&amp;auth=xxxxx</p>
+
+<h2 id="note-11">Note 1.1:</h2>
+
+<p>IRIS will populate “&amp;” as a value instead of HL7 standard value “\T" for client. Upon request, IRIS can populate “\T\” instead of”8”. Example:</p>
+
+<p>o “…?patientOrderId=273013\T\asPdf…” to “…?patientOrderId=273013&amp;asPdf…”</p>
+
+<p>Patient MRN is displayed here:</p>
+
+<p>o patientOrderId=12345</p>
+
+<p>Document type:</p>
+
+<p>o  aspdf=True</p>
+
+<p>Document status (will always be set to False)</p>
+
+<p>o isPreliminary=False</p>
+
+<p>Document pointer</p>
+
+<p>o  auth=xxxxx</p>
+
+<h2 id="sample-obx-segment-encapsulated-data">Sample OBX segment (Encapsulated Data):</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OBX|27|ED|||PDF^TEXT^^Base64^[ Base64 Encoded PDF]||||||F 
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Name and type</th>
+      <th>Sample value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>OBX-1</td>
+      <td>Set ID - OBX (SI)</td>
+      <td>27</td>
+      <td>Increase sequentially by 1</td>
+    </tr>
+    <tr>
+      <td>OBX-2</td>
+      <td>Value Type (ID)</td>
+      <td>ED</td>
+      <td>Encapsulated Data (ED): used when an encoded PDF is configured; this configuration can be used in addition to or in lieu of the RP configuration</td>
+    </tr>
+    <tr>
+      <td>OBX-3</td>
+      <td>Observation Identifier (CE)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-4</td>
+      <td>Observation Sub-Id (ST)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-5</td>
+      <td>Observation Value (Varies)</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Encapsulated Data (ED)</td>
+      <td>PDF^TEXT^^Base64^[Base64 Encoded PDF]</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-5.1 Source application</td>
+      <td>PDF</td>
+      <td>This is the document type</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-5.2 Type of data</td>
+      <td>TEXT</td>
+      <td>“TEXT” is the default value</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-5.3 Data subtype</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-5.4 Encoding</td>
+      <td>Base64</td>
+      <td>Always “Base64” which matchesthe encoding</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>OBX-5.4 Data (ST)</td>
+      <td>See Note 2.0 Below</td>
+      <td>Actual PDF data using base64 encoding mechanism</td>
+    </tr>
+    <tr>
+      <td>OBX-6</td>
+      <td>Units (CE)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-7</td>
+      <td>References Range (ST)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-8</td>
+      <td>Abnormal Flags (IS)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-9</td>
+      <td>Probability (NM)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-10</td>
+      <td>Nature of Abnormal Test (ID)</td>
+      <td> </td>
+      <td>Empty by default</td>
+    </tr>
+    <tr>
+      <td>OBX-11</td>
+      <td>Observation Result Status (ID)</td>
+      <td>F</td>
+      <td>F = Final, C = Corrected*</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Note 2.0: This will contain a Base64 encoded pdf document. An example can be provided upon request.</p>
+
+<p><a href="#table-of-contents">back to Table of Contents</a></p>
+
+<hr />
+
+<h2 id="example-messages">Example Messages</h2>
+
+<h3 id="example-a">Example A</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MSH|^\~\&amp;|IRIS|IRIS|Vendor|Vendor|20191220174508||ORU^R01|191220174508|T|2.3 
+PID||Test2106462|Test2106462||TestLN^TestFN||19630130|M||||||||||293907374|
+PV1|1|O|WRSIM||||FakeNPInum^DocLastName^ROBERT^^^MD^MD^^^^^^NPI|FakeNPInum^DocLastName^ROBERT^^^MD^MD^^^^^^NPI|||||||||FakeNPInum^DocLastName^ROBERT^^^MD^MD^^^^^^NPI||293907374|||||||||||||||||||||||||20191220054252|20191220054252 
+ORC|RE|111997409|799248^IRIS||F||||20191220174508|||FakeNPInum^DocLastName^ROBERT^^^MD^MD^^^^^^NPI 
+OBR|1|111997409|799248^IRIS|^FUNDUS PHOTOGRAPHY^EAP^^FUNDAL PHOTO|||20191220054252|||||||20191220054252||FakeNPInum^DocLastName^ROBERT^^^MD^M D^^^^^^NPI||||||20191220054412|||F|||||||adiaz@retinalscreenings.com^Diaz^Adam^^Adam Diaz, MD, NPI: NPI0987654, Taxonomy: 207W00000X 
+OBX|1|ST|SEVERITY^^IRIS|1|NORMAL||||||F 
+OBX|2|ST|RIGHTDIABRETIN^^IRIS|2|None||||||F 
+OBX|3|ST|RIGHTMACEDEMA^^IRIS|3|None||||||F 
+OBX|4|ST|RIGHTOTHERRETIN^^IRIS|4|None||||||F
+OBX|5|ST|RIGHTQUALAPP^^IRIS|5|Gradable Image||||||F 
+OBX|6|ST|LEFTDIABRETIN^^IRIS|6|None||||||F 
+OBX|7|ST|LEFTMACEDEMA^^IRIS|7|None||||||F 
+OBX|8|ST|LEFTOTHERRETIN^^IRIS|8|None||||||F 
+OBX|9|ST|LEFTQUALAPP^^IRIS|9|Gradable Image||||||F 
+OBX|10|FT|Result^^IRIS|001|Retinal Study Result for TestFN TestLN||||||F 
+OBX|11|FT|Result^^IRIS|002|||||||F 
+OBX|12|FT|Result^^IRIS|003|TestFN TestLN, a 56 y/o, M (DOB: 01-30-1963, MRN: Test2106462)||||||F 
+OBX|13|FT|Result^^IRIS|004|presented to Iris Test Client on 12-20-2019 for a retinal imaging study of the left and right eyes.||||||F 
+OBX|14|FT|Result^^IRIS|005|||||||F 
+OBX|15|FT|Result^^IRIS|006|Based on the findings of the study, the following is recommended for TestFN TestLN||||||F TestFN TestLN||||||F 
+OBX|16|FT|Result^^IRIS|007|Normal Scan: Please advise the patient to return for a scan in 12 months.||||||F 
+OBX|17|FT|Result^^IRIS|008|||||||F
+OBX|18|FT|Result^^IRIS|009|Interpreting Provider's Comments: No comments provided||||||F 
+OBX|19|FT|Result^^IRIS|010|||||||F 
+OBX|20|FT|Result^^IRIS|011|Right eye findings: Normal Result. Negative for Diabetic Retinopathy.||||||F 
+OBX|21|FT|Result^^IRIS|012|||||||F
+OBX|22|FT|Result^^IRIS|013|Left eye findings: Normal Result. Negative for Diabetic Retinopathy.||||||F 
+OBX|23|FT|Result^^IRIS|014|||||||F
+OBX|24|FT|Result^^IRIS|015|||||||F
+OBX|25|FT|Result^^IRIS|016|This result was electronically signed by Diaz, Adam, on 12-20-2019 05:44:12 UTC time.||||||F 
+OBX|26|FT|Result^^IRIS|017|||||||F
+OBX|27|FT|Result^^IRIS|018|NOTE: Any pathology noted on this diabetic retinal evaluation should be confirmed by an appropriate ophthalmic examination.||||||F 
+OBX|27|ED|||PDF^TEXT^^Base64^&amp;#36;{ENCODED DOCUMENT REMOVED}||||||F 
+</code></pre></div></div>
+<h3 id="example-b">Example B</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MSH|^\~\&amp;|IRIS|IRIS|Vendor|Vendor|20191223193115||ORU^R01|191223193115|P|2.3 
+PID||MRNtest123|MRNtest123||TESTB^IRIS||19391126|F||||||||||123456789|
+PV1|1|O|WRSIM||||NPI5556666^DocLastName^MAZHAR^^^MD^MD^^^^^^NPI|NPI5556666^DocLastName^MAZHAR^^^MD^MD^^^^^^NPI|||||||||NPI5556666^DocLastName^MAZHAR^^^MD^MD^^^^^^NPI||123456789|||||||||||||||||||||||||20191223012424|20191223012424 
+ORC|RE|12378912|799932^IRIS||F||||20191223193115|||NPI5556666^DocLastName^MAZHAR^^^MD^MD^^^^^^NPI 
+OBR|1|12378912|799932^IRIS|^FUNDUS PHOTOGRAPHY^EAP^^FUNDAL PHOTO|||20191223012424|||||||20191223012424||NPI5556666^DocLastName^MAZHAR^^^MD^M D^^^^^^NPI||||||20191223012555|||F|||||||1234567890^Diaz^Adam^^^MD^MD^^^^^^NPI 
+OBX|1|ST|SEVERITY^^IRIS|1|CRITICAL|||AA|||F 
+OBX|2|ST|LEFTDIABRETIN^^IRIS|2|Severe|||AA|||F 
+OBX|3|ST|LEFTMACEDEMA^^IRIS|3|Severe|||AA|||F 
+OBX|4|ST|LEFTOTHERRETIN^^IRIS|4|Suspected Vein Occlusion|||A|||F 
+OBX|5|ST|LEFTQUALAPP^^IRIS|5|Gradable Image||||||F 
+OBX|6|ST|RIGHTDIABRETIN^^IRIS|6|Moderate|||A|||F 
+OBX|7|ST|RIGHTMACEDEMA^^IRIS|7|Moderate|||A|||F
+OBX|8|ST|RIGHTOTHERRETIN^^IRIS|8|Suspected Dry AMD|||A|||F 
+OBX|9|ST|RIGHTQUALAPP^^IRIS|9|Gradable Image||||||F 
+OBX|10|FT|Result^^IRIS|001|Retinal Study Result for IRIS TESTB||||||F 
+OBX|11|FT|Result^^IRIS|002|||||||F 
+OBX|12|FT|Result^^IRIS|003|IRIS TESTB, a 80 y/o, F (DOB: 11-26-1939, MRN: MRNtest123)||||||F 
+OBX|13|FT|Result^^IRIS|004|presented to Southcoast Health - WRS Internal Medicine on 12-23-2019 for a retinal imaging study of the left and right eyes.||||||F 
+OBX|14|FT|Result^^IRIS|005|||||||F 
+OBX|15|FT|Result^^IRIS|006|Based on the findings of the study, the following is recommended for IRIS TESTB||||||F 
+OBX|16|FT|Result^^IRIS|007|Next Available Appointment: Refer patient to a retina specialist, next available appointment.||||||F available appointment.||||||F 
+OBX|17|FT|Result^^IRIS|008|||||||F
+OBX|18|FT|Result^^IRIS|009|Interpreting Provider's Comments: No comments provided||||||F 
+OBX|19|FT|Result^^IRIS|010|Diagnoses Present: E11.3311 - Type 2 diabetes mellitus with moderate nonproliferative diabetic retinopathy with macular edema, right eye||||||F 
+OBX|20|FT|Result^^IRIS|011|E11.3412 - Type 2 diabetes mellitus with severe nonproliferative diabetic retinopathy with macular edema, left eye||||||F 
+OBX|21|FT|Result^^IRIS|012|||||||F
+OBX|22|FT|Result^^IRIS|013|Right eye findings: Diabetic Retinopathy: Moderate||||||F 
+OBX|23|FT|Result^^IRIS|014|Macular Edema: Moderate||||||F 
+OBX|24|FT|Result^^IRIS|015|Other: Suspected Dry AMD||||||F 
+OBX|25|FT|Result^^IRIS|016|||||||F
+OBX|26|FT|Result^^IRIS|017|Left eye findings: Diabetic Retinopathy: Severe||||||F 
+OBX|27|FT|Result^^IRIS|018|Macular Edema: Severe||||||F 
+OBX|28|FT|Result^^IRIS|019|Other: Suspected Vein Occlusion||||||F 
+OBX|29|FT|Result^^IRIS|020|||||||F
+OBX|30|FT|Result^^IRIS|021|||||||F
+OBX|31|FT|Result^^IRIS|022|This result was electronically signed by Diaz, Adam, on 12-23-2019 07:25:55 UTC time.||||||F 07:25:55 UTC time.||||||F 
+OBX|32|FT|Result^^IRIS|023|||||||F 
+OBX|33|FT|Result^^IRIS|024|NOTE: Any pathology noted on this diabetic retinal evaluation should be confirmed by an appropriate ophthalmic examination.||||||F 
+OBX|34|RP|LINK^^PDFLINK|34|https://api.retinalscreenings.com/api/PatientOrders/GetSingleResultFo rDisplayInEmr?patientOrderId=799932\T\asPdf=True\T\isPreliminary=False\T\auth=6DCAFF6AC2A555F 00F9E470D221B6A077C3497A668B1EEBBB4983C8D98672F8FBA00707190026B817325C2A088725B5A0E5D7AB659AC0790C1C1D22B2C50F897\T\asAddendum=False||||||F 
+</code></pre></div></div>
+
+<h3 id="example-c">Example C</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MSH|^\~\&amp;|IRIS|IRIS|Vendor|Vendor|20200103185623||ORU^R01|200103185623|T|2.3 
+PID||15852|15852||Tester^Patient1||19990312|M|||||||||||
+PV1|1|O|Iris Test Client||||aalderman@retinalscreenings.com^Alderman^Allan^^^PhD^PhD^^^^^^NPI|aalderman@reti nalscreenings.com^Alderman^Allan^^^PhD^PhD^^^^^^NPI|||||||||aalderman@retinalscreenings.co m^Alderman^Allan^^^PhD^PhD^^^^^^NPI||Encounter|||||||||||||||||||||||||20191218044543|20191218044543 
+ORC|RE|7e39fa9b-27d6-4792-87692f9f422f187a|797619^IRIS||F||||20200103185623|||aalderman@retinalscreenings.com^Alderman^A llan^^^PhD^PhD^^^^^^NPI 
+OBR|1|7e39fa9b-27d6-4792-8769-2f9f422f187a|797619^IRIS|92250^FUNDUS PHOTOGRAPHY^EAP^^FUNDAL PHOTO|||20191218044543|||||||20191218044543||aalderman@retinalscreenings.com^Alderman^A llan^^^PhD^PhD^^^^^^NPI||||||20191220023008|||F|||||||NPIorCredentials^LastName^Ryan^20191220023008^LastName Carter, MD, NPI: 1902127947, Taxonomy: 207W00000X 
+OBX|1|ST|SEVERITY^^IRIS|1|NORMAL||||||F 
+OBX|2|ST|LEFTDIABRETIN^^IRIS|2|None||||||F 
+OBX|3|ST|LEFTMACEDEMA^^IRIS|3|None||||||F 
+OBX|4|ST|LEFTOTHERRETIN^^IRIS|4|None||||||F 
+OBX|5|ST|LEFTQUALAPP^^IRIS|5|Gradable Image||||||F 
+OBX|6|ST|RIGHTDIABRETIN^^IRIS|6|None||||||F 
+OBX|7|ST|RIGHTMACEDEMA^^IRIS|7|None||||||F 
+OBX|8|ST|RIGHTOTHERRETIN^^IRIS|8|None||||||F 
+OBX|9|ST|RIGHTQUALAPP^^IRIS|9|Gradable Image||||||F 
+NTE|1|ST|Retinal Study Result for Patient1 Tester||||||||F
+NTE|2|ST|||||||||F 
+NTE|3|ST|Patient1 Tester, a 20 y/o, M (DOB: 03-12-1999, MRN: 15852)||||||||F
+NTE|4|ST|presented to Iris Test Client on 12-18-2019 for a retinal imaging study of the left and right eyes.||||||||F 
+NTE|5|ST|||||||||F 
+NTE|6|ST|Based on the findings of the study, the following is recommended for Patient1 Tester||||||||F 
+NTE|7|ST|Normal Scan: Please advise the patient to return for a scan in 12 months.||||||||F NTE|8|ST|||||||||F 
+NTE|9|ST|Interpreting Provider's Comments: No comments provided||||||||F
+NTE|10|ST|||||||||F 
+NTE|11|ST|Right eye findings: Normal Result. Negative for Diabetic Retinopathy.||||||||F 
+NTE|12|ST|||||||||F 
+NTE|13|ST|Left eye findings: Normal Result. Negative for Diabetic Retinopathy.||||||||F 
+NTE|14|ST|||||||||F 
+NTE|15|ST|||||||||F 
+NTE|16|ST|This result was electronically signed by LastName, Ryan, MD, NPI: NPIorCredentials, Taxonomy: 207W00000X on 12-20-2019 02:30:08 UTC time.||||||||F 
+NTE|17|ST|||||||||F 
+NTE|18|ST|NOTE: Any pathology noted on this diabetic retinal evaluation should be confirmed by an appropriate ophthalmic examination.||||||||F 
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="revision-history">Revision History</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Row No.</th>
+      <th>Revision Date</th>
+      <th>Version Update</th>
+      <th>Revision Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Sept. 26, 2018</td>
+      <td>Version 1.0</td>
+      <td>Initial documentation creation Updated version</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Oct. 3, 2018</td>
+      <td>Version 2.0</td>
+      <td>Corrected typos in several segment section descriptions Added footnotes to some sections to add additional descriptions (where applicable) Added “Examples” section Updated version</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Jan. 8, 2019</td>
+      <td>Version 2.1</td>
+      <td>Added a “Revision History” section Updated version</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Jan. 3, 2020</td>
+      <td>Version 2.2</td>
+      <td>Updated examples and improved readability Corrected grammatical typos</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Jan. 21, 2020</td>
+      <td>Version 2.3</td>
+      <td>Added criteria for an optional DG1 segment Updated version</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Jun. 6, 2021</td>
+      <td>Version 2.4</td>
+      <td>Updated version</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>Aug. 31, 2021</td>
+      <td>OBS</td>
+      <td>Moving to OBS – will re-implement as TEC document</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>Aug 31, 2021</td>
+      <td>TEC 005, Rev A</td>
+      <td>Re-implemented as TEC document</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>Sep. 22, 2023</td>
+      <td>Version 2.5</td>
+      <td>Removed version from Acknowledgement section. Updated PID.19 description. Updated PV1.7.13, PV1.8.13, and PV1.17.13 descriptions. Updated ORC.12.13 description. Updated OBR.4 description. Updated OBX Summary description. Updated all OBX.11 descriptions. Updated Other descriptions (OBX.5). Corrected typos in Text Report description (OBX.5). Updated Version.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="#table-of-contents">back to Table of Contents</a></p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading"></h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name"></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p></p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
